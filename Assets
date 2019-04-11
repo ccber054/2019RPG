@@ -2,3 +2,23 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 public InputAxis Horizontal = new InputAxis(KeyCode.D, KeyCode.A, XboxControllerAxes.LeftstickHorizontal);
         public InputAxis Vertical = new InputAxis(KeyCode.W, KeyCode.S, XboxControllerAxes.LeftstickVertical);
+        
+
+
+
+if (Input.GetKey(KeyCode.A))
+        {
+            m_Camera.transform.Translate(-1, 0);
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            m_Camera.transform.Translate(1, 0);
+        }
+        if (Input.GetKey(KeyCode.W))
+        {
+            m_Camera.transform.Translate(0, 1);
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            m_Camera.transform.Translate(0, -1);
+        }
