@@ -1,24 +1,124 @@
-using UnityEngine;
-using UnityEngine.Tilemaps;
-public InputAxis Horizontal = new InputAxis(KeyCode.D, KeyCode.A, XboxControllerAxes.LeftstickHorizontal);
-        public InputAxis Vertical = new InputAxis(KeyCode.W, KeyCode.S, XboxControllerAxes.LeftstickVertical);
-        
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Game_Map
+{
+    class Matrix : Interact
+    {
+        char[,] m_data;
+        char m_player = '▼';
+        public Matrix(int x, int y)
+        {
+            m_data = new char[x, y];
+        }
+
+        public char[,] getData()
+        {
+            return m_data;
+        }
+
+        public void loadPlayer()
+        {
+            for (int r = 0; r < m_data.GetLength(0); r++)
+            {
+                for (int c = 0; c < m_data.GetLength(1); c++)
+                {
+                    if (m_data[r, c] == 'O')
+                    {
+                        m_data[r, c] = m_player;
+                    }
+                }
+            }
+        }
+
+        public void moveDown()
+        {
+            for (int r = 0; r < m_data.GetLength(0); r++)
+            {
+                for (int c = 0; c < m_data.GetLength(1); c++)
+                {
+                    if (m_data[r, c] == m_player)
+                    {
+                        if (m_data[r, c+1] == 'O')
+                        {              
+                            m_data[r, c+1] = m_player;
+                        }
+                    }
+                }
+            }
+        }
+
+        public void moveLeft()
+        {
+            for (int r = 0; r < m_data.GetLength(0); r++)
+            {
+                for (int c = 0; c < m_data.GetLength(1); c++)
+                {
+                    if (m_data[r, c] == m_player)
+                    {
+                        if (m_data[r - 1, c] == 'O')
+                        {           
+                            m_data[r - 1, c] = m_player;
+                        }
+                    }
+                }
+            }
+        }
+
+        public void moveRight()
+        {
+            for (int r = 0; r < m_data.GetLength(0); r++)
+            {
+                for (int c = 0; c < m_data.GetLength(1); c++)
+                {
+                    if (m_data[r, c] == m_player)
+                    {
+                        if (m_data[r+1, c] == 'O')
+                        {           
+                            m_data[r+1, c] = m_player;
+                        }
+                    }
+                }
+            }
+        }
+
+        public void moveUp()
+        {
+
+            for (int r = 0; r < m_data.GetLength(0); r++)
+            {
+                for (int c = 0; c < m_data.GetLength(1); c++)
+                {
+                    if (m_data[r, c] == m_player)
+                    {
+                        if (m_data[r, c - 1] == 'O')
+                        {               
+                            m_data[r, c - 1] = m_player;
+                        }
+                    }
+                }
+            }
+        }
+
+        public override string ToString()
+        {
+            string ret = "";
+            for (int r = 0; r < m_data.GetLength(0); r++)
+            {
+                for (int c = 0; c < m_data.GetLength(1); c++)
+                {
+                    m_data[r, c] = 'Φ';
+                    ret += m_data[r, c];
+                }
+            }
+
+            return ret;
+        }
 
 
 
-if (Input.GetKey(KeyCode.A))
-        {
-            m_Camera.transform.Translate(-1, 0);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            m_Camera.transform.Translate(1, 0);
-        }
-        if (Input.GetKey(KeyCode.W))
-        {
-            m_Camera.transform.Translate(0, 1);
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            m_Camera.transform.Translate(0, -1);
-        }
+    }
+}
